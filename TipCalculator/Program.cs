@@ -14,30 +14,38 @@ namespace TipCalculator
             int maxRetries = 5;
             while (retries < maxRetries)
             {
+
                 Console.WriteLine("What was your bill amount?");
                 string billInput = Console.ReadLine();
-
                 billInput = billInput.Trim().Trim('$');
 
                 if (decimal.TryParse(billInput, out bill))
-                {                    
+                {
+
                     break;
+
                 }
 
                 retries++;
-                if(retries < maxRetries)
-                {
-                    Console.WriteLine($"The value {billInput} is not a valid bill amount. Please try again.");            
-                }
-                else
-                {
-                    Console.WriteLine("You have reached the max number of retries.");
-                }
+                PrintRetryResponse(retries, maxRetries, billInput);
+
             }
+            //retryResponse
+            //if(retries < maxRetries)
+            //{
+            //    Console.WriteLine($"The value {billInput} is not a valid bill amount. Please try again.");            
+            //}
+            //else
+            //{
+            //    Console.WriteLine("You have reached the max number of retries.");
+            //}
+
 
             retries = 0;
             while (retries < maxRetries)
-            { 
+
+
+            {
                 Console.WriteLine("What percent would you like to tip?");
                 string tipPercentInput = Console.ReadLine();
                 tipPercentInput = tipPercentInput.Trim().Trim('%');
@@ -45,16 +53,6 @@ namespace TipCalculator
                 if (decimal.TryParse(tipPercentInput, out tipPercent))
                 {
                     break;
-                }
-
-                retries++;
-                if (retries < maxRetries)
-                {
-                    Console.WriteLine($"The value {tipPercentInput} is not a valid tip. Please try again.");
-                }
-                else
-                {
-                    Console.WriteLine("You have reached the max number of retries.");
                 }
             }
 
@@ -65,6 +63,19 @@ namespace TipCalculator
             Console.WriteLine($"Your total bill ${totalBill}.");
 
             Console.ReadLine();
+        }
+
+        static void PrintRetryResponse(int retries, int maxRetries, string userInput)
+        {
+            if (retries < maxRetries)
+            {
+                Console.WriteLine($"The value {userInput} is not a valid amount. Please try again.");
+            }
+            else
+            {
+                Console.WriteLine("You have reached the max number of retries.");
+
+            }
         }
     }
 }
